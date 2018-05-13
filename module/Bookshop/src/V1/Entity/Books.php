@@ -23,13 +23,6 @@ class Books
     private $id;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="release_date", type="date", precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $releaseDate;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=250, precision=0, scale=0, nullable=false, unique=false)
@@ -37,9 +30,16 @@ class Books
     private $title;
 
     /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="release_date", type="date", precision=0, scale=0, nullable=true, unique=false)
+     */
+    private $releaseDate;
+
+    /**
      * @var Authors
      *
-     * @ORM\ManyToMany(targetEntity="Authors", inversedBy="books")
+     * @ORM\ManyToMany(targetEntity="Authors", mappedBy="books")
      */
     private $authors;
 
@@ -120,5 +120,25 @@ class Books
     public function setAuthors($authors)
     {
         $this->authors = $authors;
+    }
+
+    /**
+     * @param ArrayCollection $authors
+     */
+    public function addAuthors(ArrayCollection $authors)
+    {
+        foreach($authors as $author) {
+            $this->authors->add($author);
+        }
+    }
+
+    /**
+     * @param ArrayCollection $authors
+     */
+    public function removeAuthors(ArrayCollection $authors)
+    {
+        foreach($authors as $author) {
+            $this->authors->remove($author->getId());
+        }
     }
 }

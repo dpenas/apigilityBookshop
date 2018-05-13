@@ -23,13 +23,6 @@ class Authors
     private $id;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="born_date", type="date", precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $bornDate;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50, precision=0, scale=0, nullable=false, unique=false)
@@ -37,9 +30,16 @@ class Authors
     private $name;
 
     /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="born_date", type="date", precision=0, scale=0, nullable=true, unique=false)
+     */
+    private $bornDate;
+
+    /**
      * @var Books
      *
-     * @ORM\ManyToMany(targetEntity="Books", mappedBy="authors")
+     * @ORM\ManyToMany(targetEntity="Books", inversedBy="authors")
      */
     protected $books;
 

@@ -91,7 +91,7 @@ class AuthorsTest extends AbstractHttpControllerTestCase
      */
     public function testBooksPost($authorId)
     {
-        $post = json_encode(['title' => 'BookTest', 'authors' => ['id' => $authorId]]);
+        $post = json_encode(['title' => 'BookTest', 'releaseDate' => '2018-01-01', 'authors' => ['id' => $authorId]]);
 
         $request = $this->getRequest();
         $request->setMethod('POST');

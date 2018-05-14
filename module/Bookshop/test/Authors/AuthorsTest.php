@@ -84,6 +84,25 @@ class AuthorsTest extends AbstractHttpControllerTestCase
         return $authorId;
     }
 
+    public function testAuthorsPostInvalid()
+    {
+        $post = json_encode(['name'=> 'AuthorTestNew', 'bornDate' => 'incorrectDate']);
+
+        $request = $this->getRequest();
+        $request->setMethod('POST');
+        $request->setContent($post);
+        $headers = $this->getRequest()->getHeaders();
+        $headers->addHeaderLine('Accept', 'application/json');
+        $headers->addHeaderLine('Content-Type', 'application/json');
+
+        $this->dispatch('/authors');
+
+        $response = json_decode($this->getResponse()->getContent());
+
+        $this->assertEquals('The input does not appear to be a valid date', $response->validation_messages->bornDate->dateInvalidDate);
+        $this->assertEquals(422, $response->status);
+    }
+
     /**
      * @depends testAuthorsPut
      *

@@ -114,6 +114,8 @@ class AuthorsTest extends AbstractHttpControllerTestCase
         $request = $this->getRequest();
         $request->setMethod('DELETE');
 
+        // This would have been better do to in a tearDown or tearDownAfterClass function
+        // but due to the conditions of the tests, it's not very easy to do so.
         $this->removeBook($bookId);
         $this->removeAuthor($author->id);
     }

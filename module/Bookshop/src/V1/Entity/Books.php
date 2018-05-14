@@ -40,7 +40,7 @@ class Books
     /**
      * @var Authors
      *
-     * @ORM\ManyToMany(targetEntity="Authors", mappedBy="books")
+     * @ORM\ManyToMany(targetEntity="Authors", inversedBy="books")
      */
     private $authors;
 
@@ -132,7 +132,11 @@ class Books
      */
     public function addAuthors(Collection $authors): void
     {
-        foreach($authors as $author) {
+        foreach ($authors as $author) {
+//            if ($this->authors->contains($author)) {
+//                continue;
+//            }
+
             $this->authors->add($author);
         }
     }
@@ -142,7 +146,11 @@ class Books
      */
     public function removeAuthors(Collection $authors): void
     {
-        foreach($authors as $author) {
+        foreach ($authors as $author) {
+//            if (!$this->authors->contains($author)) {
+//                continue;
+//            }
+
             $this->authors->remove($author->getId());
         }
     }

@@ -3,7 +3,6 @@
 namespace Bookshop\V1\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,7 +39,7 @@ class Authors
     /**
      * @var Books
      *
-     * @ORM\ManyToMany(targetEntity="Books", inversedBy="authors")
+     * @ORM\ManyToMany(targetEntity="Books", mappedBy="authors")
      */
     protected $books;
 

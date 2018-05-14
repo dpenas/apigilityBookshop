@@ -3,6 +3,7 @@
 namespace Bookshop\V1\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,7 +54,7 @@ class Books
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -65,7 +66,7 @@ class Books
      *
      * @return Books
      */
-    public function setReleaseDate($releaseDate = null)
+    public function setReleaseDate(?\DateTime$releaseDate = null): self
     {
         $this->releaseDate = $releaseDate;
 
@@ -77,7 +78,7 @@ class Books
      *
      * @return \DateTime|null
      */
-    public function getReleaseDate()
+    public function getReleaseDate(): ?\DateTime
     {
         return $this->releaseDate;
     }
@@ -89,7 +90,7 @@ class Books
      *
      * @return Books
      */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -101,31 +102,35 @@ class Books
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @return Authors
+     * @return Collection
      */
-    public function getAuthors()
+    public function getAuthors(): Collection
     {
         return $this->authors;
     }
 
     /**
-     * @param Authors $authors
+     * @param Collection|null $authors
+     *
+     * @return Books
      */
-    public function setAuthors($authors)
+    public function setAuthors(?Collection $authors): self
     {
         $this->authors = $authors;
+
+        return $this;
     }
 
     /**
-     * @param ArrayCollection $authors
+     * @param Collection $authors
      */
-    public function addAuthors(ArrayCollection $authors)
+    public function addAuthors(Collection $authors): void
     {
         foreach($authors as $author) {
             $this->authors->add($author);
@@ -133,9 +138,9 @@ class Books
     }
 
     /**
-     * @param ArrayCollection $authors
+     * @param Collection $authors
      */
-    public function removeAuthors(ArrayCollection $authors)
+    public function removeAuthors(Collection $authors): void
     {
         foreach($authors as $author) {
             $this->authors->remove($author->getId());

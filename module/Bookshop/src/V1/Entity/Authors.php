@@ -3,6 +3,7 @@
 namespace Bookshop\V1\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,7 +54,7 @@ class Authors
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -65,7 +66,7 @@ class Authors
      *
      * @return Authors
      */
-    public function setBornDate($bornDate = null)
+    public function setBornDate(?\DateTime $bornDate = null): self
     {
         $this->bornDate = $bornDate;
 
@@ -77,7 +78,7 @@ class Authors
      *
      * @return \DateTime|null
      */
-    public function getBornDate()
+    public function getBornDate(): ?\DateTime
     {
         return $this->bornDate;
     }
@@ -89,7 +90,7 @@ class Authors
      *
      * @return Authors
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -101,7 +102,7 @@ class Authors
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

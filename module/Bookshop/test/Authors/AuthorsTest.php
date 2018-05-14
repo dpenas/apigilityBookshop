@@ -103,6 +103,7 @@ class AuthorsTest extends AbstractHttpControllerTestCase
         $this->dispatch('/books');
 
         $response = json_decode($this->getResponse()->getContent());
+
         $author = $response->_embedded->authors[0];
         $bookId = $response->id;
 

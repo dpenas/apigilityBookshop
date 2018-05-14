@@ -3,6 +3,7 @@
 namespace Bookshop\V1\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="authors")
  * @ORM\Entity
  */
-class Authors
+class Authors extends Entity
 {
     /**
      * @var int
@@ -104,5 +105,25 @@ class Authors
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBooks(): array
+    {
+        return $this->serializeCollection($this->books);
+    }
+
+    /**
+     * @param Collection $books
+     *
+     * @return Authors
+     */
+    public function setBooks(Collection $books): self
+    {
+        $this->books = $books;
+
+        return $this;
     }
 }

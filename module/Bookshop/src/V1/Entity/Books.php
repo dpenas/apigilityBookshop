@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="books")
  * @ORM\Entity
  */
-class Books
+class Books extends Entity
 {
     /**
      * @var int
@@ -108,11 +108,11 @@ class Books
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getAuthors(): Collection
+    public function getAuthors(): array
     {
-        return $this->authors;
+        return $this->serializeCollection($this->authors);
     }
 
     /**
@@ -133,9 +133,9 @@ class Books
     public function addAuthors(Collection $authors): void
     {
         foreach ($authors as $author) {
-//            if ($this->authors->contains($author)) {
-//                continue;
-//            }
+            if ($this->authors->contains($author)) {
+                continue;
+            }
 
             $this->authors->add($author);
         }
@@ -147,9 +147,9 @@ class Books
     public function removeAuthors(Collection $authors): void
     {
         foreach ($authors as $author) {
-//            if (!$this->authors->contains($author)) {
-//                continue;
-//            }
+            if (!$this->authors->contains($author)) {
+                continue;
+            }
 
             $this->authors->remove($author->getId());
         }

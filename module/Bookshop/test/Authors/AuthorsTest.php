@@ -123,12 +123,11 @@ class AuthorsTest extends AbstractHttpControllerTestCase
 
         $response = json_decode($this->getResponse()->getContent());
 
-        $author = $response->_embedded->authors[0];
+        $author = $response->authors[0];
         $bookId = $response->id;
 
         $this->assertEquals('BookTest', $response->title);
         $this->assertEquals($authorId, $author->id);
-        $this->assertEquals('AuthorTestNew', $author->name);
 
         $request = $this->getRequest();
         $request->setMethod('DELETE');
